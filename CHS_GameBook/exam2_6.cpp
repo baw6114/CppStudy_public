@@ -3,7 +3,7 @@
 void ifelseGrades(int score);
 void switchcaseGrades(int score);
 
-//Use if-else set Grades Score
+//Use if-else & switch-case set Grades Score
 
 int main(int argc, char const *argv[])
 {
@@ -24,7 +24,7 @@ void ifelseGrades(int score){
     if(score >= 90){
         grade = 'A';
     }else if(score >= 80){
-        grade = 'B';
+        grade = 'B'; 
     }else if(score >= 70){
         grade = 'C';
     }else if(score >= 60){
