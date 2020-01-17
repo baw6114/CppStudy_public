@@ -1,4 +1,42 @@
-// 데이터 처리 전문가가 되고 싶은 어피치는 문자열을 압축하는 방법에 대해 공부를 하고 있습니다. 
+#include <stdio.h>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(string s){
+    int answer = 0;
+     vector<string> v;
+     
+    for(int var = 1; var < s.size()/2 ; var++){
+
+        for(int splitnum =0; splitnum < s.size() - var ; splitnum++){
+                v.assign(s.size(), "");
+                v[splitnum] = s.substr(splitnum, splitnum + var);
+                for(int check =0; check < v.size() ; check++){
+                    (v[check] == v[check + 1] ? true : false);
+
+                }
+        }
+    }
+
+    answer = v.size();
+
+    return answer;
+}
+
+int main(){
+
+    string s = "ababaaa";
+    int t = solution(s);
+    printf("%d", t);
+
+    return 0;
+}
+
+
+
+ // 데이터 처리 전문가가 되고 싶은 어피치는 문자열을 압축하는 방법에 대해 공부를 하고 있습니다. 
 //최근에 대량의 데이터 처리를 위한 간단한 비손실 압축 방법에 대해 공부를 하고 있는데, 
 //문자열에서 같은 값이 연속해서 나타나는 것을 그 문자의 개수와 반복되는 값으로 표현하여 
 //더 짧은 문자열로 줄여서 표현하는 알고리즘을 공부하고 있습니다.
@@ -54,19 +92,3 @@
 // 문자열은 제일 앞부터 정해진 길이만큼 잘라야 합니다.
 // 따라서 주어진 문자열을 x / ababcdcd / ababcdcd 로 자르는 것은 불가능 합니다.
 // 이 경우 어떻게 문자열을 잘라도 압축되지 않으므로 가장 짧은 길이는 17이 됩니다.
-#include <stdio.h>
-#include <string>
-#include <vector>
-
-using namespace std;
-
-
-
-int solution(string s){
-    int answer = 0;
-    strlen(s.c_str());
-    vector<string> v();
-
-    return answer;
-}
-
