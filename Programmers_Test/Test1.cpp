@@ -8,6 +8,7 @@ int solution(string s){
     int answer = 0;
     vector<string> v;
     vector<string> v2;
+    vector<string>::iterator iter;
     int num = 1;
 
     for(int var = 1; var < s.size()/2 ; var++){
@@ -15,9 +16,9 @@ int solution(string s){
         for(int splitnum =0; splitnum < s.size() - var ; splitnum++){
                 v.assign(s.size(), "");
                 v[splitnum] = s.substr(splitnum, splitnum + var);
-                for(int check =0; check < v.size() ; check++){
+                for(iter = v.begin(); iter != v.end() ; iter++){
 
-                    if(v[check] == v[check + 1]){
+                    if(iter == ++iter){
                         //v[check] = to_string(num+1) + v[check];
                         num++;
                     }else{
