@@ -6,30 +6,41 @@ using namespace std;
 
 int solution(string s){
     int answer = 0;
-    vector<string> v;
-    vector<string> v2;
+    vector<string> SplitVec;
+    string result_string = s;
+    string temp_string = "";
     vector<string>::iterator iter;
+    string standard = "";
     int num = 1;
 
     for(int var = 1; var < s.size()/2 ; var++){
-
+        
         for(int splitnum =0; splitnum < s.size() - var ; splitnum++){
-                v.assign(s.size(), "");
-                v[splitnum] = s.substr(splitnum, splitnum + var);
-                for(iter = v.begin(); iter != v.end() ; iter++){
+                SplitVec.assign(s.size(), "");
+                SplitVec[splitnum] = s.substr(splitnum, splitnum + var);
+                
+        }
+        for(iter = SplitVec.begin(); iter != SplitVec.end() ; iter++){
 
-                    if(iter == ++iter){
-                        //v[check] = to_string(num+1) + v[check];
-                        num++;
-                    }else{
-                        
-                    }
-
+            standard = SplitVec[0];
+            if( standard == *iter){
+                num++;
+            }else{
+                if(num >= 2){
+                    temp_string += to_string(num) + standard;
+                    standard = *iter;
+                    num = 1;
                 }
+                temp_string += standard;
+            }
+
+        }
+        if(result_string.size() > temp_string.size()){
+            result_string = temp_string;
         }
     }
 
-    answer = v.size();
+    answer = result_string.size();
 
     return answer;
 }
