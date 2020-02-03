@@ -13,24 +13,27 @@ int solution(string s){
     string standard = "";
     int num = 1;
 
-    for(int var = 1; var < s.size()/2 ; var++){
+    SplitVec.assign(s.size(), "");
+
+    for(int var = 1; var < s.size() / 2 +1 ; var++){
         
-        for(int splitnum =0; splitnum < s.size() - var ; splitnum++){
-                SplitVec.assign(s.size(), "");
-                SplitVec[splitnum] = s.substr(splitnum, splitnum + var);
+        for(int splitnum =0; splitnum < s.size()/var ; splitnum++){
                 
+                SplitVec[splitnum] = s.substr(splitnum*var, var);
+                cout << splitnum << ":" <<SplitVec[splitnum] << endl;
         }
         standard = SplitVec[0];
         for(iter = SplitVec.begin(); iter != SplitVec.end() ; iter++){
             
-            if( standard == *iter){
+            if(standard == *iter){
                 num++;
             }else{
                 if(num >= 2){
                     temp_string += to_string(num) + standard;
                     
+                }else{
+                    temp_string += standard;
                 }
-                temp_string += standard;
                 standard = *iter;
                 num = 1;
             }
@@ -49,15 +52,25 @@ int solution(string s){
 
 int main(){
 
-    string s1 = "ababaaa";
-    //2abaaa : abab3a
+    string s1 = "aabbaccc"; //7
     int t = solution(s1);
-    printf("%d \n", t);
+    printf("%d \n\n", t);
 
-    string s2 = "aaabbb";
-    //3a3b
-    t = solution(s2);
-    printf("%d", t);
+    s1 = "ababcdcdababcdcd"; //9
+    t = solution(s1);
+    printf("%d \n\n", t);
+
+    // s1 = "abcabcdede"; //8
+    // t = solution(s1);
+    // printf("%d \n\n", t);
+
+    // s1 = "abcabcabcabcdededededede"; //14
+    // t = solution(s1);
+    // printf("%d \n\n", t);
+
+    // s1 = "xababcdcdababcdcd"; //17
+    // t = solution(s1);
+    // printf("%d \n\n", t);
 
     return 0;
 }
