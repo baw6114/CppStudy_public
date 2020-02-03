@@ -20,18 +20,19 @@ int solution(string s){
                 SplitVec[splitnum] = s.substr(splitnum, splitnum + var);
                 
         }
+        standard = SplitVec[0];
         for(iter = SplitVec.begin(); iter != SplitVec.end() ; iter++){
-
-            standard = SplitVec[0];
+            
             if( standard == *iter){
                 num++;
             }else{
                 if(num >= 2){
                     temp_string += to_string(num) + standard;
-                    standard = *iter;
-                    num = 1;
+                    
                 }
                 temp_string += standard;
+                standard = *iter;
+                num = 1;
             }
 
         }
@@ -41,14 +42,21 @@ int solution(string s){
     }
 
     answer = result_string.size();
-
+    //printf("%s \n", result_string.c_str()); //printf에서 string을 쓰기 위해선 c_str()함수 필요(C++에서 쓸 때)
+    cout << result_string << endl;  //이왕이면 C++에서는 cout을 쓰자
     return answer;
 }
 
 int main(){
 
-    string s = "ababaaa";
-    int t = solution(s);
+    string s1 = "ababaaa";
+    //2abaaa : abab3a
+    int t = solution(s1);
+    printf("%d \n", t);
+
+    string s2 = "aaabbb";
+    //3a3b
+    t = solution(s2);
     printf("%d", t);
 
     return 0;
