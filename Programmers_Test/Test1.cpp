@@ -13,40 +13,47 @@ int solution(string s){
     string standard = "";
     int num = 1;
 
-    SplitVec.assign(s.size(), "");
-
     for(int var = 1; var < s.size() / 2 +1 ; var++){
-        
-        for(int splitnum =0; splitnum < s.size()/var ; splitnum++){
+        SplitVec.clear();
+        SplitVec.assign(s.size()/var+1, "");
+        for(int splitnum =0; splitnum < s.size()/var+1 ; splitnum++){
                 
                 SplitVec[splitnum] = s.substr(splitnum*var, var);
-                cout << splitnum << ":" <<SplitVec[splitnum] << endl;
+                //cout << splitnum << ":" <<SplitVec[splitnum] << endl;
         }
         standard = SplitVec[0];
-        for(iter = SplitVec.begin(); iter != SplitVec.end() ; iter++){
-            
+        iter = SplitVec.begin();
+        temp_string = "";
+        num = 1;
+        for(iter++; iter != SplitVec.end() ; iter++){
+            //cout << "iter : "<< *iter << endl;
             if(standard == *iter){
                 num++;
             }else{
                 if(num >= 2){
                     temp_string += to_string(num) + standard;
-                    
                 }else{
                     temp_string += standard;
                 }
-                standard = *iter;
                 num = 1;
+                standard = *iter;
             }
-
+            if(iter == SplitVec.end() - 1){
+                if(num >= 2){
+                    temp_string += to_string(num) + standard;
+                }else{
+                    temp_string += standard;
+                }
+            }
+            //cout << "temp_string : "<< temp_string << endl;
         }
         if(result_string.size() > temp_string.size()){
             result_string = temp_string;
         }
     }
-
     answer = result_string.size();
     //printf("%s \n", result_string.c_str()); //printf에서 string을 쓰기 위해선 c_str()함수 필요(C++에서 쓸 때)
-    cout << result_string << endl;  //이왕이면 C++에서는 cout을 쓰자
+    //cout << result_string << endl;  //이왕이면 C++에서는 cout을 쓰자
     return answer;
 }
 
@@ -60,17 +67,17 @@ int main(){
     t = solution(s1);
     printf("%d \n\n", t);
 
-    // s1 = "abcabcdede"; //8
-    // t = solution(s1);
-    // printf("%d \n\n", t);
+    s1 = "abcabcdede"; //8
+    t = solution(s1);
+    printf("%d \n\n", t);
 
-    // s1 = "abcabcabcabcdededededede"; //14
-    // t = solution(s1);
-    // printf("%d \n\n", t);
+    s1 = "abcabcabcabcdededededede"; //14
+    t = solution(s1);
+    printf("%d \n\n", t);
 
-    // s1 = "xababcdcdababcdcd"; //17
-    // t = solution(s1);
-    // printf("%d \n\n", t);
+    s1 = "xababcdcdababcdcd"; //17
+    t = solution(s1);
+    printf("%d \n\n", t);
 
     return 0;
 }
