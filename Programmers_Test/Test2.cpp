@@ -1,22 +1,37 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
-
-void main(){
-    vector<string> participant = {"leo", "kiki", "eden"};
-    vector<string> completion = {"kiki", "eden"};
-    cout << solution(participant, completion) << endl;
-
-}
 
 string solution(vector<string> participant, vector<string> completion){
 
     string anwser = "";
-    
+    unordered_map<string, int> map;
+    for(string name : participant){
+        map[name]++;    //name, 즉, 키값을 넣기만 해줘도 자동으로 value인 int를 0으로 선언된다
+    }
+    for(string name : completion){
+        map[name]--;
+    }
+    for(string name : participant){
+        if(map[name] > 0){
+            anwser = name;
+        }
+    }
     return anwser;
 }
+
+int main(){
+    vector<string> participant = {"leo", "kiki", "eden"};
+    vector<string> completion = {"kiki", "eden"};
+    cout << solution(participant, completion) << endl;
+
+    return 0;
+}
+
+
 
 // 문제 설명
 // 수많은 마라톤 선수들이 마라톤에 참여하였습니다. 단 한 명의 선수를 제외하고는 모든 선수가 마라톤을 
