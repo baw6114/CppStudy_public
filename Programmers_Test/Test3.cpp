@@ -1,18 +1,31 @@
 #include <string>
 #include <vector>
+#include <iostream>
+#include <algorithm>
 
 using namespace std;
 
 int checkanswer(vector<int> answers ,vector<int> tester){
     int result = 0;
+    int size = answers.size();
+    int testersize = tester.size();
 
-    for(int numAnswer = 0; numAnswer < answers.size; numAnswer++){
-        if(answers[numAnswer] == tester[numAnswer%tester.size]){
+    for(int numAnswer = 0; numAnswer < size; numAnswer++){
+        if(answers[numAnswer] == tester[numAnswer%testersize]){
             result++;
         }
     }
     
     return result;
+}
+
+int maximum(int first, int second, int third){
+
+    int MaxData = 0;
+
+    MaxData = (first < second ? second: first);
+    MaxData = MaxData < third ? third : MaxData;
+    return MaxData ;
 }
 
 vector<int> solution(vector<int> answers) {
@@ -21,19 +34,36 @@ vector<int> solution(vector<int> answers) {
     vector<int> supo2 = {2, 1, 2, 3, 2, 4, 2, 5};
     vector<int> supo3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
     vector<int> gradeTemp = {};
-    vector<int> grade = {};
+    int Max_Val = 0;
 
     gradeTemp[0] = checkanswer(answers, supo1);
     gradeTemp[1] = checkanswer(answers, supo2);
     gradeTemp[2] = checkanswer(answers, supo3);
     
-    for(int num = 0; num < gradeTemp.size-1; num++){
-        if(gradeTemp[num] != 0){
-            //gradeTemp[num+1] > gradeTemp[num]?grade[num]=num+1:;
+    Max_Val = maximum(gradeTemp[0], gradeTemp[1], gradeTemp[2]);
+
+    if(Max_Val == 0){
+        answer = {};
+    }else{
+        for(int index = 0; index < gradeTemp.size(); index++){
+            if(gradeTemp[index] == Max_Val){
+                answer.push_back(index + 1);
+            }
         }
     }
+    
 
     return answer;
+}
+
+int main(){
+    vector<int> answers = {1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,1};
+    vector<int> result = {};
+    result = solution(answers);
+    cout << "result : "<< result[0] << result[1] << result[2] << endl;
+
+    return 0;
+
 }
 
 // 문제 설명
