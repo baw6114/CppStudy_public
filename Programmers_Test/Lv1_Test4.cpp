@@ -23,6 +23,11 @@ vector<int> solution(vector<int> array, vector<vector<int>> commands) {
 
 int main(){
 
+    vector<int> array = {1, 5, 2, 6, 3, 7, 4};
+    vector<vector<int>> commands = {{2, 5, 3}, {4, 4, 1}, {1, 7, 3}};
+    vector<int> test;
+    test = solution(array, commands);
+    cout << "result : " << test[0] << ":" << test[1] <<":" << test[2] << endl;
 }
 
 // K번째수(정렬)
