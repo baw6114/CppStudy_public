@@ -33,9 +33,9 @@ vector<int> solution(vector<int> answers) {
     vector<int> supo1 = {1, 2, 3, 4, 5};
     vector<int> supo2 = {2, 1, 2, 3, 2, 4, 2, 5};
     vector<int> supo3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
-    vector<int> gradeTemp;
+    vector<int> gradeTemp;  //gradeTemp ={}; 이런 식의 초기화는 할 수 없다
     int MaxVal = 0;
-    gradeTemp.assign(3,0);
+    gradeTemp.assign(3,0);  //gradeTemp 초기화 및 사이즈 지정
 
     gradeTemp[0] = checkanswer(answers, supo1);
     gradeTemp[1] = checkanswer(answers, supo2);
@@ -48,7 +48,7 @@ vector<int> solution(vector<int> answers) {
     }else{
         for(int index = 0; index < gradeTemp.size(); index++){
             if(gradeTemp[index] == MaxVal){
-                answer.push_back(index + 1);
+                answer.push_back(index + 1);    //배열의 마지막 인자 뒤에 데이터를 입력
             }
         }
     }
