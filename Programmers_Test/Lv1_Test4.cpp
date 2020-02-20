@@ -16,6 +16,7 @@ vector<int> solution(vector<int> array, vector<vector<int>> commands) {
         sort(needsortdata.begin(), needsortdata.end());
         answer.push_back(needsortdata.at(commands[index][2] - 1));
         needsortdata.clear();
+        needsortdata.resize(commands[index][1] - commands[index][0]);
     }
 
     return answer;
