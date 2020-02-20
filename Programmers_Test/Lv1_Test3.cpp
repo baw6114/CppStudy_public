@@ -33,34 +33,34 @@ vector<int> solution(vector<int> answers) {
     vector<int> supo1 = {1, 2, 3, 4, 5};
     vector<int> supo2 = {2, 1, 2, 3, 2, 4, 2, 5};
     vector<int> supo3 = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
-    vector<int> gradeTemp = {};
-    int Max_Val = 0;
+    vector<int> gradeTemp;
+    int MaxVal = 0;
+    gradeTemp.assign(3,0);
 
     gradeTemp[0] = checkanswer(answers, supo1);
     gradeTemp[1] = checkanswer(answers, supo2);
     gradeTemp[2] = checkanswer(answers, supo3);
     
-    Max_Val = maximum(gradeTemp[0], gradeTemp[1], gradeTemp[2]);
+    MaxVal = maximum(gradeTemp[0], gradeTemp[1], gradeTemp[2]);
 
-    if(Max_Val == 0){
-        answer = {};
+    if(MaxVal == 0){    
+        answer = {};    //그 누구도 한 문제도 못 맞췄다면?
     }else{
         for(int index = 0; index < gradeTemp.size(); index++){
-            if(gradeTemp[index] == Max_Val){
+            if(gradeTemp[index] == MaxVal){
                 answer.push_back(index + 1);
             }
         }
     }
     
-
     return answer;
 }
 
 int main(){
     vector<int> answers = {1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,1};
-    vector<int> result = {};
+    vector<int> result;
     result = solution(answers);
-    cout << "result : "<< result[0] << result[1] << result[2] << endl;
+    cout << "result : "<< result[0] << ": "<< result[1] << ": "<< result[2] << endl;
 
     return 0;
 
