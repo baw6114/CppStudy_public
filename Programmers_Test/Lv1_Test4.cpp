@@ -10,13 +10,27 @@ vector<int> solution(vector<int> array, vector<vector<int>> commands) {
     vector<int> needsortdata;
 
     for(int index = 0; index < commands.size(); index++){
-        for( int order = commands[index][0] - 1; order < commands[index][1] - 1; order++){
+        for( int order = commands[index][0] - 1; order <= commands[index][1] - 1; order++){
             needsortdata.push_back(array[order]);
+            cout << "TempResult :"<< order << ":"<< needsortdata[order] << endl;
         }
         sort(needsortdata.begin(), needsortdata.end());
         answer.push_back(needsortdata.at(commands[index][2] - 1));
         needsortdata.clear();
-        needsortdata.resize(commands[index][1] - commands[index][0]);
+    }
+
+    return answer;
+}
+
+//다른 사람의 풀이
+vector<int> solution2(vector<int> array, vector<vector<int>> commands) {
+    vector<int> answer; 
+    vector<int> temp;
+
+    for(int i = 0; i < commands.size(); i++) {
+        temp = array;
+        sort(temp.begin() + commands[i][0] - 1, temp.begin() + commands[i][1]); //Sort를 필요한 부분만 한 뒤에 
+        answer.push_back(temp[commands[i][0] + commands[i][2]-2]);  //Sort한 데이터에서 answer에 해당하는 위치를 push_back으로 입력, -1, -1이 더해져서 -2 위치 값을 잡아주기 위함
     }
 
     return answer;
