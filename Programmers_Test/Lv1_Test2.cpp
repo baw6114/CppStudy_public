@@ -8,7 +8,7 @@ using namespace std;
 string solution(vector<string> participant, vector<string> completion){
 
     string anwser = "";
-    unordered_map<string, int> map;
+    unordered_map<string, int> map; //<키값, 데이터>
     for(string name : participant){
         map[name]++;    //name, 즉, 키값을 넣기만 해줘도 자동으로 value인 int를 0으로 선언된다
     }
