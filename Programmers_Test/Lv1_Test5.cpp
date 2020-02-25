@@ -7,31 +7,33 @@ using namespace std;
 
 int solution(int n, vector<int> lost, vector<int> reserve) {
     int answer = 0;
-    int size_lost = lost.size();
-    int size_reserve = reserve.size();
     vector<int> students(n,0);
 
-    for(int num = 0; num < size_lost; num++){
-        students.at(lost[num]-1)--;
-        cout << "lost stu : "<< lost[num]-1 << ": "<<students.at(lost[num]-1) << endl;
+    for(int num : lost){
+        students.at(num-1)--;
     }
-    for(int num = 0; num < size_reserve; num++){
-        students.at(reserve[num]-1)++;
-        cout << "reserve stu : "<< reserve[num]-1 << ": "<<students.at(reserve[num]-1) << endl;
+    for(int num : reserve){
+        students.at(num-1)++;
     }
     for(int num = 0; num < n; num++){
-        if(students[num] != 0){
-            //좌측 탐색(먼저 해야함)
-            if(num!=0){
-                if((students[num]==1 && students[num-1] == -1)? true : false){
-                    answer++;
-                    students[num] = 0;
-                }
-                
+        //좌측 판별
+        if(num!=0){
+            if((students[num]>=1 && students[num-1] == -1)? true : false){
+                students[num-1]++;
+                students[num]--;
             }
         }
+        //우측 판별
+        if((students[num]>=1 && students[num+1] == -1)? true : false){
+                students[num+1]++;
+                students[num]--;
+        }
     }
-
+    //결과값 체크
+    for(int check : students){
+        check != -1 ? answer++ : false;
+    }
+    
     return answer;
 }
 
@@ -39,6 +41,11 @@ int main(){
     int n = 5;
     vector<int> lost = {2, 4};
     vector<int> reserve = {1, 3, 5};
+
+    cout << "result : "<< solution(n, lost, reserve) << endl;
+
+    lost = {2, 4};
+    reserve = {3};
 
     cout << "result : "<< solution(n, lost, reserve) << endl;
 
