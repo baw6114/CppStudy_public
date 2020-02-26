@@ -16,6 +16,10 @@ int solution(int n, vector<int> lost, vector<int> reserve) {
         students.at(num-1)++;
     }
     for(int num = 0; num < n; num++){
+        //좌측을 먼저 판별해야하는 이유
+        //n = 5, lost = {2, 4}, reserve = {3, 5}의 경우를 생각해보면, 우측을 먼저 탐색하게된다면,
+        //3의 학생이 4의 학생에게 빌려주게되고, 5의 학생은 2의 학생에게 빌려줄 수 없게되므로, 결과값이 달라진다.
+        //위와 같은 경우가 존재하기에, 판별을 한다면 좌측을 먼저 판별해야한다.
         //좌측 판별
         if(num!=0){
             if((students[num]>=1 && students[num-1] == -1)? true : false){
