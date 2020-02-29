@@ -7,15 +7,18 @@ using namespace std;
 
 string solution(int a, int b) {
     string answer = "";
-    vector<string> Day = {"FRI", "SAT", "SUN", "MON", "TUE", "WED", "THU"};
+    vector<string> Day = {"FRI", "SAT", "SUN", "MON", "TUE", "WED", "THU"}; //시작 요일에 맞게 배열 선언
     vector<int> Month = {30, 31};   //16년도 2월은 29일까지
     int SumOfDay = 0;
 
     for(int num = 1; num < a; num++){
+        if(num == 8){
+            swap(Month[0], Month[1]);
+        }
         SumOfDay += Month[num%2];
     }
     SumOfDay += b;
-    (a >= 3? SumOfDay -= 1 : false);
+    (a >= 3? SumOfDay -= 1 : false);    //윤년이고 2월 29일까지이므로, 1일을 제외시켜준다
 
     answer = Day[(SumOfDay-1) % 7];
 
@@ -24,8 +27,25 @@ string solution(int a, int b) {
 
 int main(){
 
-    cout << solution(3, 24) << endl;
-
+    for(int month = 1; month <= 12; month++){
+        if(month%2){
+            for(int Day = 1; Day <= 31; Day++){
+                cout << month << "/" << Day << " : "<<solution(month, Day) << endl;
+            }
+        }else{
+            if(month==2){
+                for(int Day = 1; Day <= 29; Day++){
+                    cout << month << "/" << Day << " : "<<solution(month, Day) << endl;
+                }
+            }else{
+                for(int Day = 1; Day <= 30; Day++){
+                    cout << month << "/" << Day << " : "<<solution(month, Day) << endl;
+                }
+            }
+            
+        }
+        
+    }
 }
 // 2016년
 // 문제 설명
