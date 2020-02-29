@@ -8,9 +8,9 @@ vector<int> solution(vector<int> arr)
 {
     vector<int> answer;
     arr.erase(unique(arr.begin(), arr.end()), arr.end());
+    //unique 함수 : 중복된 값들을 모두 배열의 뒤 쪽으로 보낸 뒤, 중복된 데이터의 시작위치 반환
     answer = arr;
-    cout << "Hello Cpp" << endl;
-
+    
     return answer;
 }
 
