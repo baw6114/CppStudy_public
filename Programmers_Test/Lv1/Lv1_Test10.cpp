@@ -29,8 +29,14 @@ long long solution2(int a, int b) {
 //갯수가 홀수개일 때는 어째서 되는건지? 0.5가 없어지지 않는 건지? 버림이 안되는건가?
 
 int main(){
-
-    cout << solution(3, 5) << endl;
+    int a = 1;
+    int b = 4;
+    cout << solution(a, b) << endl;
+    //아래의 세가지 경우를 보면, 4, 4, 5가 반환되는데 괄호를 어떻게 치느냐에 따라서, 연산의 결과가 달라짐을 볼 수 있다.
+    //자료형이 바뀜으로 인한 손실을 항상 생각을 해야되는 것을 알 수 있다.
+    cout <<  2*(int)((1+4)/2) << endl;
+    cout <<  2*((1+4)/2) << endl;
+    cout <<  2*(1+4)/2 << endl;
     return 0;
 }
 
