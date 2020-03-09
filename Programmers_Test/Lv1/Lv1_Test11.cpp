@@ -5,22 +5,42 @@
 
 using namespace std;
 
-int compare(const void *a, const void *b){
-    
+int num;
+
+//인자 두 개를 받는 비교 함수로, 첫 번째 인자가 더 작을 경우 true 를 리턴
+//더 작을 경우, 정렬을 할 필요가 없음( 아스키 코드에 따라 )
+bool compareto(string a, string b){
+
+    //at(var) : string에서 var위치의 문자 반환
+    return a.at(num) != b.at(num) ? a.at(num) < b.at(num) : a < b;
 }
 
 vector<string> solution(vector<string> strings, int n) {
     vector<string> answer;
-    vector<string> Temp;
-    
-    for(string str : strings){
-        Temp.push_back(str.substr(n, str.size() - n));
-    }
-    //qsort(strings, strings.size(), );
+    answer = strings;
+    num = n;
+
+    sort(answer.begin(), answer.end(), compareto);
 
     return answer;
 }
 
+int main(){
+    vector<string> Temp = {};
+    vector<string> Test = {"sun", "bed", "car"};
+
+    Temp = solution(Test, 1);
+    
+    for(string var : Temp){
+        cout<< var <<endl;
+    }
+
+    Test = {"abce", "abcd", "cdx"};
+    Temp = solution(Test, 2);
+    for(string var : Temp){
+        cout<< var <<endl;
+    }
+}
 // 문자열 내 마음대로 정렬하기
 // 문제 설명
 // 문자열로 구성된 리스트 strings와, 정수 n이 주어졌을 때, 각 문자열의 인덱스 n번째 글자를 기준으로 오름차순 정렬하려 합니다. 
