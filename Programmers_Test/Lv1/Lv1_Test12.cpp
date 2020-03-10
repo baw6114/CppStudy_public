@@ -1,15 +1,33 @@
 #include <string>
 #include <iostream>
+
 using namespace std;
 
 bool solution(string s)
 {
     bool answer = true;
+    int CheckNum = 0;
+  
+    for(char var : s){
 
-    // [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
-    cout << "Hello Cpp" << endl;
+        var = tolower(var);
+
+        if(var == 'p'){
+            CheckNum++;
+        }else if(var == 'y'){
+            CheckNum--;
+        }
+
+    }
+    answer = CheckNum == 0? true : false;
 
     return answer;
+}
+
+int main(){
+    string s = "abawerppypy";
+    
+    cout<< solution(s) <<endl;
 }
 
 // 문자열 내 p와 y의 개수
@@ -22,7 +40,7 @@ bool solution(string s)
 
 // 제한사항
 // 문자열 s의 길이 : 50 이하의 자연수
-// 문자열 s는 알파벳으로만 이루어져 있습니다.
+// 문자열 s는 알파벳으로만 이루어져 있습니다.   ->공백 없음
 // 입출력 예
 // s	answer
 // pPoooyY	true
