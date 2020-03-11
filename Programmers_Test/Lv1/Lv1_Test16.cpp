@@ -8,7 +8,7 @@ using namespace std;
 //에라토테네스의 체 + 제곱근
 int solution(int n) {
     int answer = 0;
-    vector<int> TempArray(n,0);
+    vector<int> TempArray(n+1,0);
 
     for (int i = 2; i <= n; i++) {
         TempArray[i] = i;   //해당 숫자까지 모든 값을 배열에 입력, 1은 이미 0으로 초기화 상태
@@ -17,14 +17,16 @@ int solution(int n) {
     for (int index = 2; index <= sqrt(n); index++) { 
 
         // 이미 체크된 수의 배수는 건너뛴다
-        if (TempArray[index] == 0) continue;
-        
-        for (int mul = index + index; mul <= n; mul += index) { 
-            //index를 제외한(index+index) index의 배수들은 0을 대입
+        if (TempArray[index] != 0){
+            for (int mul = index + index; mul <= n; mul += index) { 
+                //index를 제외한(index+index) index의 배수들은 0을 대입
             
-            TempArray[mul] = 0;
+                TempArray[mul] = 0;
 
+            }
         }
+        
+        
     }
     for(int var : TempArray){
         if(var != 0){
@@ -38,10 +40,10 @@ int solution(int n) {
 //에라토테네스의 체
 int solution2(int n) {
     int answer = 0;
-    vector<int> TempArray(n,0);
+    vector<int> TempArray(n+1,0);
 
     for (int i = 2; i <= n; i++) {
-        TempArray[i] = i;   //해당 숫자까지 모든 값을 배열에 입력
+        TempArray[i] = i;   //해당 숫자까지 모든 값을 배열에 입력, 1은 이미 0으로 초기화 상태
     }
 
     for (int index = 2; index <= n; index++) { 
@@ -102,8 +104,15 @@ int solution4(int n) {
 }
 
 int main(){
-
-    cout<< solution2(1000000) <<endl;
+    int n = 0;
+    n = 500;
+    for(int i = 2; i < n; i++){
+        cout<< "Solution 3 : " << solution3(i) <<endl;
+        cout<< "Solution 2 : " << solution2(i) <<endl;
+        cout<< "Solution 1 : " << solution(i) <<endl;
+        cout<< " "<<endl;
+    }
+    
 
 }
 
