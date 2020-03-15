@@ -8,15 +8,26 @@ using namespace std;
 long long solution(long long n) {
     long long answer = 0;
 
-    
+    if(sqrt(n) - (int)sqrt(n) != 0){
+        answer = -1;
+    }else{
+        answer = (sqrt(n) + 1)*(sqrt(n) + 1);
+    }
 
     return answer;
 }
 
+//다른 사람의 풀이 정수인지 어떻게 판별?
+long long solution2(long long n) {
+    long long answer = sqrt(n);
+    
+    return powl(answer, 2) == n ? powl(answer + 1, 2) : -1;
+}
+
 int main(){
-    double temp = 0;
-    temp = sqrt(3);
-    cout<< temp <<endl;
+    long long temp = 26;
+    
+    cout<< solution(temp) <<endl;
 }
 // 정수 제곱근 판별
 // 문제 설명
