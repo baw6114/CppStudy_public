@@ -1,13 +1,47 @@
 #include <string>
 #include <vector>
+#include <iostream>
 
 using namespace std;
 
 vector<int> solution(int n, int m) {
     vector<int> answer;
+    int remain;
+    int a = n;
+    int b = m;
+    
+    //유클리드 호제법을 이용
+    if(a<b){
+        int Temp = 0;
+        Temp = b;
+        b = a;
+        a = Temp;
+    }
+    remain = b;
 
+    //최대 공약수 찾기
+    while(a%b != 0){
+       remain = a%b; 
+       a = b;
+       b = remain;
+    }
+    ///////////////////////
+    
+    //최대 공약수
+    answer.push_back(remain);
+    //최소 공배수
+    answer.push_back(n*m/remain);
     
     return answer;
+}
+
+int main(){
+    int n = 3;
+    int m = 12;
+    
+    for(int var : solution(n, m)){
+        cout<< var <<endl;
+    }
 }
 
 // 최대공약수와 최소공배수
