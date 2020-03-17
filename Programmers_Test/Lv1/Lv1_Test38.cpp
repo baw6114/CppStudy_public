@@ -5,6 +5,16 @@
 
 using namespace std;
 
+bool comparetoCustom(pair<double, int>a, pair<double, int>b){
+    
+    if(a.first>b.first){
+        return true;
+    }else if(a.first == b.first){
+        return false;
+    }
+    return false;
+}
+
 vector<int> solution(int N, vector<int> stages) {
     vector<int> answer;
     float reachNum = 0.f;
@@ -25,7 +35,10 @@ vector<int> solution(int N, vector<int> stages) {
         reachNum = 0.f;
         clearNum = 0.f;
     }
-
+    sort(RateArrNum.begin(), RateArrNum.end(), comparetoCustom);
+    for(pair<double,int> var : RateArrNum){
+        answer.push_back(var.second);
+    }
 
     return answer;
 }
