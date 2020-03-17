@@ -1,12 +1,49 @@
 #include <string>
 #include <vector>
+#include <iostream>
+#include <algorithm>
 
 using namespace std;
 
 vector<int> solution(int N, vector<int> stages) {
     vector<int> answer;
-    
+    float reachNum = 0.f;
+    float clearNum = 0.f;
+    vector<pair<double, int>> RateArrNum;
+
+    for(int i = 1; i <= N; i++){
+        for(int var : stages){
+            if(var >= i){
+                clearNum++; //해당 stage 이상 stage에 도착한 사람 수
+                if(var == i){
+                    reachNum++; //해당 stage에 도달했으나 클리어하지 못한 사람 수
+                }
+            }
+        }
+        RateArrNum.push_back(make_pair(reachNum/clearNum, i));  //해당 스테이지의 실패율 페어
+
+        reachNum = 0.f;
+        clearNum = 0.f;
+    }
+
+
     return answer;
+}
+
+int main(){
+    int N = 5;
+    vector<int> stages = {2, 1, 2, 6, 2, 4, 3, 3};
+
+    for(int var : solution(N, stages)){
+        cout<< var <<endl;
+    }
+    cout<< endl;
+    N = 4;
+    stages = {4,4,4,4,4};
+    for(int var : solution(N, stages)){
+        cout<< var <<endl;
+    }
+
 }
 
 // 실패율
