@@ -5,40 +5,49 @@
 
 using namespace std;
 
+//pair 클래스의 유용성을 알 수 있다
 bool comparetoCustom(pair<double, int>a, pair<double, int>b){
     
-    if(a.first>b.first){
-        return true;
-    }else if(a.first == b.first){
-        return false;
+    if(a.first == b.first){
+        return  a.second < b.second;    //두 번째 pair기준으로 내림차순 정렬
     }
-    return false;
+    return a.first > b.first;   //첫 번째 pair기준으로 오름차순 정렬
 }
 
 vector<int> solution(int N, vector<int> stages) {
     vector<int> answer;
     float reachNum = 0.f;
     float clearNum = 0.f;
+    double CalcFailure;
     vector<pair<double, int>> RateArrNum;
 
-    for(int i = 1; i <= N; i++){
-        for(int var : stages){
-            if(var >= i){
-                clearNum++; //해당 stage 이상 stage에 도착한 사람 수
-                if(var == i){
-                    reachNum++; //해당 stage에 도달했으나 클리어하지 못한 사람 수
+    if(N <= 500 && N >= 1 && stages.size() >= 1 && stages.size() <= 200000){
+        for(int i = 1; i <= N; i++){
+            for(int var : stages){
+                if(var >= i){
+                    clearNum++; //해당 stage 이상 stage에 도착한 사람 수
+                    if(var == i){
+                        reachNum++; //해당 stage에 도달했으나 클리어하지 못한 사람 수
+                    }
                 }
             }
-        }
-        RateArrNum.push_back(make_pair(reachNum/clearNum, i));  //해당 스테이지의 실패율 페어
+            if(clearNum <= 0){
+                CalcFailure = 0;
+            }else{
+                CalcFailure = reachNum/clearNum;
+            }
 
-        reachNum = 0.f;
-        clearNum = 0.f;
+            RateArrNum.push_back(make_pair(CalcFailure, i));  //해당 스테이지의 실패율 페어
+
+            reachNum = 0.f;
+            clearNum = 0.f;
+        }
+        sort(RateArrNum.begin(), RateArrNum.end(), comparetoCustom);
+        for(pair<double,int> var : RateArrNum){
+            answer.push_back(var.second);
+        }
     }
-    sort(RateArrNum.begin(), RateArrNum.end(), comparetoCustom);
-    for(pair<double,int> var : RateArrNum){
-        answer.push_back(var.second);
-    }
+    
 
     return answer;
 }
@@ -52,7 +61,7 @@ int main(){
     }
     cout<< endl;
     N = 4;
-    stages = {4,4,4,4,4};
+    stages = {4,4,4,4,5};
     for(int var : solution(N, stages)){
         cout<< var <<endl;
     }

@@ -3,20 +3,56 @@
 
 using namespace std;
 
+void SetCalcData(int *arr ,int index, char check){
+
+    switch (check)
+    {
+        case 'D':
+            arr[index] = arr[index]*arr[index];
+            break;
+
+        case 'T':
+            arr[index] = arr[index]*arr[index]*arr[index];
+            break;
+
+        case '#':   //아차상
+            arr[index] *= -1;
+            break;
+
+        case '*':   //스타상
+            if(index > 0){
+                arr[index -1] *= 2;
+            }
+            arr[index] *= 2;
+            break;
+        
+        default:
+            break;
+    }
+}
+
 int solution(string dartResult) {
     int answer = 0;
+    int arr[3];
+    int index = 0;
     string num = "";
 
     for(char var : dartResult){
         if(var >= '0' && var <= '9'){
             num += var;
+            //기존에 index를 넣었던 위치, 이 위치에 넣으면 10이 나오는 경우에 index가 올바르지 않다
         }else{
-            
             if(num != ""){
-                answer = stoi(num);
+                arr[index] = stoi(num);
+                index++;    //index를 증가시켜주는 위치가 중요
                 num = "";
             }
+            SetCalcData(arr, index - 1, var);
         }
+    }
+    for(int var : arr){
+        cout<< "var :" << var << endl;
+        answer += var;
     }
 
     return answer;
@@ -26,6 +62,14 @@ int main(){
     string dartResult = "1S2D*3T";
 
     cout<< solution(dartResult) <<endl;
+
+    dartResult = "1D2S#10S";
+    cout<< solution(dartResult) <<endl;
+
+    dartResult = "1D2S0T";
+    cout<< solution(dartResult) <<endl;
+
+
 
 }
 
