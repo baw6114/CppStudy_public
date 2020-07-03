@@ -1,30 +1,37 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <map>
+#include <unordered_map>
 
 using namespace std;
 
 int solution(vector<vector<string>> clothes) {
-    int answer = 0;
+    int answer = 1;
 
-    map<string, string> Parts;
+    unordered_map<string, int> partNum;
 
     for(int i = 0; i < clothes.size(); i++)
     {
-        Parts.insert(make_pair(clothes[i][1],clothes[i][0]));
+        partNum[clothes[i][1]]++;   //각 부위별 갯수 해시
+    }
 
+    unordered_map<string, int>::iterator iter;
+    for(iter=partNum.begin(); iter != partNum.end(); iter++)
+    {
+        answer *= iter->second + 1;
     }
     
-    return answer;
+    return answer - 1;  //아무 것도 입지 않은 경우를 제외
 }
 
 int main(){
     
     vector<vector<string>> test = {{"yellow_hat", "headgear"}, {"blue_sunglasses", "eyewear"}, {"green_turban", "headgear"}};
-    solution(test);
+    cout << solution(test) << endl;
 
 }
+// 경우의 수 문제, 경우의 수에서 쓰이는 공식을 알아야 한다.
+// 
 
 // 위장
 // 문제 설명
