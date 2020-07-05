@@ -6,6 +6,24 @@ using namespace std;
 
 int solution(int bridge_length, int weight, vector<int> truck_weights) {
     int answer = 0;
+    vector<int> goal;
+    vector<int> onway;
+    int checkweight = 0;
+
+    while (truck_weights.size() <= 0)
+    {
+        for(int i = bridge_length; i < 0; i--)
+        {
+            checkweight += truck_weights.front();
+            if(checkweight <= weight)
+            {
+                onway.push_back(truck_weights.front());
+            }
+
+            answer++;
+        }
+    }
+
     return answer;
 }
 
